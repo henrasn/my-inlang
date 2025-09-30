@@ -8,7 +8,10 @@
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js",
-    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js"
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@6.0.11/dist/index.min.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-json@5.1.56/dist/index.min.js",
+    "https://cdn.jsdelivr.net/npm/inlang-plugin-xcstrings@0.1.3/out/index.min.js"
   ],
   "plugin.inlang.messageFormat": {
     "pathPattern": "./messages/{languageTag}.json"
