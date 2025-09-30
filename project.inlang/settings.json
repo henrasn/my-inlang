@@ -11,8 +11,8 @@
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@latest/dist/index.js"
   ],
   "plugin.inlang.json": {
-    "pathPattern": "./messages/{languageTag}.json",
-    "variableReferencePattern": ["{", "}"]
+    "variableReferencePattern": ["{", "}"],
+    "pathPattern": "./messages/{languageTag}.json"
   },
   "messageLintRuleLevels": {
     "messageLintRule.inlang.missingTranslation": "error"
