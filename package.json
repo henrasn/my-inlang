@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "paraglide-js compile --project ./project.inlang --outdir ./paraglide",
     "machine-translate": "inlang machine translate --project project.inlang"
   },
