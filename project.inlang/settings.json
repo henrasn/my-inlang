@@ -10,7 +10,7 @@
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@latest/dist/index.js"
   ],
-  "plugin.inlang.messageFormat": {
+  "plugin.inlang.json": {
     "pathPattern": "./messages/{languageTag}.json"
   },
   "messageLintRuleLevels": {
