@@ -18,9 +18,7 @@
   ],
   "plugin.inlang.i18next": {
     "variableReferencePattern": ["{{", "}}"],
-    "pathPattern": {
-      "common":"./messages/{languageTag}/common.json"
-    }
+    "pathPattern": "./messages/{languageTag}.json"
   },
   "messageLintRuleLevels": {
     "messageLintRule.inlang.missingTranslation": "error",
