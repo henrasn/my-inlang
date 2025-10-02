@@ -1,20 +1,22 @@
 {
   "$schema": "https://inlang.com/schema/project-settings",
-  "sourceLanguageTag": "en",
-  "languageTags": [
+  "baseLocale": "en",
+  "locales": [
     "en",
     "de"
   ],
   "modules": [
-    "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-valid-js-identifier@1.0.8/dist/index.min.js",
+    "https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js",
     "https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@latest/dist/index.js"
   ],
-  "plugin.inlang.json": {
+  "plugin.inlang.i18next": {
     "variableReferencePattern": ["{", "}"],
-    "pathPattern": "./messages/{languageTag}.json"
+    "pathPattern": "./messages/{locale}.json"
   },
   "messageLintRuleLevels": {
-    "messageLintRule.inlang.missingTranslation": "error"
+    "messageLintRule.inlang.missingTranslation": "error",
+    "messageLintRule.inlang.validJsIdentifier": "error"
   }
 }

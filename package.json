@@ -10,7 +10,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@inlang/paraglide-js": "2.4.0",
-    "@inlang/cli": "^3.0.0"
+    "@inlang/cli": "^3.0.0",
+    "@inlang/paraglide-js": "2.4.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
   }
 }
