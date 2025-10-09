@@ -3,12 +3,12 @@
   "sourceLanguageTag": "en",
   "languageTags": [
     "en",
-    "de"
+    "id"
   ],
   "baseLocale": "en",
   "locales": [
     "en",
-    "de"
+    "id"
   ],
   "modules": [
     "https://cdn.jsdelivr.net/npm/@inlang/message-lint-rule-missing-translation@latest/dist/index.js",
