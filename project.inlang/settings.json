@@ -19,7 +19,7 @@
   "plugin.inlang.i18next": {
     "variableReferencePattern": ["{{", "}}"],
     "pathPattern": {
-      "common":"./messages/{languageTag}/common.json"
+      "common":"./messages/locales/{languageTag}/common.json"
     }
   },
   "messageLintRuleLevels": {
