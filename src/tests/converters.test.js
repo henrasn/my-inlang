@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert');
-const { toAndroidXml, toXcstrings } = require('../utils/converters');
+const { toAndroidXml, toXcstrings, fromAndroidXml, fromXcstrings } = require('../utils/converters');
 
 test('toAndroidXml generates correct XML with escaped content', () => {
   const strings = {
@@ -73,8 +73,64 @@ test('toXcstrings generates structure with plural variations', () => {
     pluralLocalization.variations.plural.other.stringUnit.value,
     '%#@count@ rooms'
   );
-  assert.strictEqual(
-    pluralLocalization.stringVariations.count.formatSpecifier,
-    '%#@count@'
-  );
+   assert.strictEqual(
+     pluralLocalization.stringVariations.count.formatSpecifier,
+     '%#@count@'
+   );
+ });
+
+test('fromAndroidXml parses XML back to JSON', () => {
+  const xml = `<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="greeting">Hello &amp; %1$s</string>
+  <string name="raw">1 &lt; 2</string>
+  <plurals name="rooms">
+    <item quantity="one">%1$d room</item>
+    <item quantity="other">%1$d rooms</item>
+  </plurals>
+</resources>`;
+
+  const json = fromAndroidXml(xml);
+  assert.strictEqual(json.greeting, 'Hello & %1$s');
+  assert.strictEqual(json.raw, '1 < 2');
+  assert.strictEqual(json.rooms_one, '%1$d room');
+  assert.strictEqual(json.rooms_other, '%1$d rooms');
+});
+
+test('fromXcstrings parses XCStrings back to JSON for a language', () => {
+  const xcstring = {
+    version: '1.0',
+    sourceLanguage: 'en',
+    strings: {
+      greeting: {
+        extractionState: 'manual',
+        localizations: {
+          en: { stringUnit: { state: 'translated', value: 'Hello %1$@' } },
+          id: { stringUnit: { state: 'translated', value: 'Halo %1$@' } }
+        }
+      },
+      rooms: {
+        extractionState: 'manual',
+        localizations: {
+          en: {
+            variations: {
+              plural: {
+                one: { stringUnit: { state: 'translated', value: '%#@count@ room' } },
+                other: { stringUnit: { state: 'translated', value: '%#@count@ rooms' } }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+  const enJson = fromXcstrings(xcstring, 'en');
+  assert.strictEqual(enJson.greeting, 'Hello %1$@');
+  assert.strictEqual(enJson.rooms_one, '%#@count@ room');
+  assert.strictEqual(enJson.rooms_other, '%#@count@ rooms');
+
+  const idJson = fromXcstrings(xcstring, 'id');
+  assert.strictEqual(idJson.greeting, 'Halo %1$@');
+  assert.strictEqual(Object.keys(idJson).length, 1); // only greeting for id
 });

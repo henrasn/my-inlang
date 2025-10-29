@@ -120,4 +120,51 @@ function escapeAndroidValue(value) {
     .replace(/>/g, '&gt;');
 }
 
-module.exports = { toAndroidXml, toXcstrings };
+function fromAndroidXml(xml) {
+  const json = {};
+
+  // Parse strings
+  const stringRegex = /<string name="([^"]+)">(.*?)<\/string>/gs;
+  let match;
+  while ((match = stringRegex.exec(xml)) !== null) {
+    const key = match[1];
+    let value = match[2];
+    value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    json[key] = value;
+  }
+
+  // Parse plurals
+  const pluralRegex = /<plurals name="([^"]+)">(.*?)<\/plurals>/gs;
+  while ((match = pluralRegex.exec(xml)) !== null) {
+    const base = match[1];
+    const items = match[2];
+    const itemRegex = /<item quantity="([^"]+)">(.*?)<\/item>/gs;
+    let itemMatch;
+    while ((itemMatch = itemRegex.exec(items)) !== null) {
+      const quantity = itemMatch[1];
+      let value = itemMatch[2];
+      value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+      json[`${base}_${quantity}`] = value;
+    }
+  }
+
+  return json;
+}
+
+function fromXcstrings(xcstring, lang) {
+  const json = {};
+  for (const [key, entry] of Object.entries(xcstring.strings)) {
+    const loc = entry.localizations[lang];
+    if (!loc) continue;
+    if (loc.stringUnit) {
+      json[key] = loc.stringUnit.value;
+    } else if (loc.variations?.plural) {
+      for (const [quantity, variant] of Object.entries(loc.variations.plural)) {
+        json[`${key}_${quantity}`] = variant.stringUnit.value;
+      }
+    }
+  }
+  return json;
+}
+
+module.exports = { toAndroidXml, toXcstrings, fromAndroidXml, fromXcstrings };

@@ -71,16 +71,26 @@ Export translations for mobile platforms:
 
 Exported files will be placed in the `output/` directory.
 
-### Syncing to Parent Project
+### Syncing Downstream (Repo to Parent Project)
 
 Sync exported and FE files to the configured target paths in the parent project:
 
-- Sync all platforms: `npm run sync`
-- Sync FE only: `npm run sync-fe`
-- Sync Android only: `npm run sync-android`
-- Sync iOS only: `npm run sync-ios`
+- Sync all platforms: `npm run sync-downstream`
+- Sync FE only: `npm run sync-downstream-fe`
+- Sync Android only: `npm run sync-downstream-android`
+- Sync iOS only: `npm run sync-downstream-ios`
 
 The sync reads `.i18n-config.json` from the parent directory (`../`) to determine target paths.
+
+### Syncing Upstream (Parent Project to Repo)
+
+Import changes from the parent project's mobile files back to this repo's JSON sources:
+
+- Import all platforms: `npm run sync-upstream`
+- Import Android only: `npm run sync-upstream-android`
+- Import iOS only: `npm run sync-upstream-ios`
+
+The import reads files from the configured paths, parses them, and merges into `messages/{lang}/{platform}.json`. For value conflicts, it prompts for confirmation to overwrite.
 
 ### Other Commands
 
