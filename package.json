@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "paraglide-js compile --project ./project.inlang --outdir ./paraglide",
-    "machine-translate": "inlang machine translate --project project.inlang"
+    "machine-translate": "inlang machine translate --project project.inlang",
+    "export-mobile": "rm -rf output/ios output/android && node export-mobile.js",
+    "export-android": "rm -rf output/android && node export-mobile.js android",
+    "export-ios": "rm -rf output/ios && node export-mobile.js ios",
+    "sync": "node sync.js",
+    "sync-fe": "node sync.js fe",
+    "sync-android": "node sync.js android",
+    "sync-ios": "node sync.js ios",
+    "test": "node --test src/tests/*.test.js"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@inlang/cli": "^3.0.0",
-    "@inlang/paraglide-js": "2.4.0"
+    "@inlang/cli": "^3.0.0"
   },
   "dependencies": {
     "sqlite3": "^5.1.7"

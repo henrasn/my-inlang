@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="register">Register</string>
+  <string name="room_price">Harga per kamar IDR%1$d</string>
+  <string name="signIn">Masuk</string>
+  <plurals name="available_room">
+    <item quantity="one">%1$d kamar</item>
+    <item quantity="other">%1$d kamar</item>
+  </plurals>
+</resources>

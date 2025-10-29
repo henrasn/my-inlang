@@ -1,0 +1,7 @@
+{
+  "signIn": "Masuk",
+  "register": "Register",
+  "available_room_one": "{{count}} kamar",
+  "available_room_other": "{{count}} kamar",
+  "room_price": "Harga per kamar IDR{{price, number}}"
+}
