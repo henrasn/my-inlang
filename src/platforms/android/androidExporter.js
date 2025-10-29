@@ -21,7 +21,10 @@ function exportAndroid(settings, androidFiles, outputDir) {
         const json = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
         const { strings, plurals } = groupPlurals(json, parserOptions);
         const xml = toAndroidXml(strings, plurals);
-        const outputPath = path.join(outputDir, 'android', `${file}_${lang}.xml`);
+        const langSuffix = lang === settings.sourceLanguageTag ? '' : `-${lang}`;
+        const dirPath = path.join(outputDir, 'android', `values${langSuffix}`);
+        fs.mkdirSync(dirPath, { recursive: true });
+        const outputPath = path.join(dirPath, `${file}.xml`);
         fs.writeFileSync(outputPath, xml, 'utf8');
       }
     }
