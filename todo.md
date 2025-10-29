@@ -1,6 +1,6 @@
 # TODO
 
-[X] export to mobile
+[x] export to mobile
 [X] export each platform separately
 [X] sync downstream to existing project
 [X] sync upstream from mobile
