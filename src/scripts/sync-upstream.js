@@ -62,8 +62,11 @@ async function importAndroid() {
     return;
   }
   const baseDir = config.android;
+  const settings = JSON.parse(fs.readFileSync('project.inlang/settings.json'));
+  const sourceLang = settings.sourceLanguageTag;
   for (const lang of langs) {
-    const xmlFile = path.join(baseDir, `main_${lang}.xml`);
+    const langSuffix = lang === sourceLang ? '' : `-${lang}`;
+    const xmlFile = path.join(baseDir, `values${langSuffix}`, 'main.xml');
     if (!fs.existsSync(xmlFile)) {
       console.log(`Android file ${xmlFile} not found, skipping ${lang}`);
       continue;

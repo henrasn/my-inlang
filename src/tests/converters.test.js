@@ -91,10 +91,10 @@ test('fromAndroidXml parses XML back to JSON', () => {
 </resources>`;
 
   const json = fromAndroidXml(xml);
-  assert.strictEqual(json.greeting, 'Hello & %1$s');
+  assert.strictEqual(json.greeting, 'Hello & {{val0}}');
   assert.strictEqual(json.raw, '1 < 2');
-  assert.strictEqual(json.rooms_one, '%1$d room');
-  assert.strictEqual(json.rooms_other, '%1$d rooms');
+  assert.strictEqual(json.rooms_one, '{{count}} room');
+  assert.strictEqual(json.rooms_other, '{{count}} rooms');
 });
 
 test('fromXcstrings parses XCStrings back to JSON for a language', () => {
@@ -126,11 +126,11 @@ test('fromXcstrings parses XCStrings back to JSON for a language', () => {
   };
 
   const enJson = fromXcstrings(xcstring, 'en');
-  assert.strictEqual(enJson.greeting, 'Hello %1$@');
-  assert.strictEqual(enJson.rooms_one, '%#@count@ room');
-  assert.strictEqual(enJson.rooms_other, '%#@count@ rooms');
+  assert.strictEqual(enJson.greeting, 'Hello {{val0}}');
+  assert.strictEqual(enJson.rooms_one, '{{count}} room');
+  assert.strictEqual(enJson.rooms_other, '{{count}} rooms');
 
   const idJson = fromXcstrings(xcstring, 'id');
-  assert.strictEqual(idJson.greeting, 'Halo %1$@');
+  assert.strictEqual(idJson.greeting, 'Halo {{val0}}');
   assert.strictEqual(Object.keys(idJson).length, 1); // only greeting for id
 });

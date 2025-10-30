@@ -261,11 +261,45 @@ function groupPlurals(json, options = {}) {
   return { strings, plurals };
 }
 
+function reverseParseValue(value, platform, isPlural = false) {
+  let index = 0;
+  const stringPlaceholder = platform === 'ios' ? /%(\d+)\$@/g : /%(\d+)\$s/g;
+  const numberPlaceholder = platform === 'ios' ? /%(\d+)\$ld/g : /%(\d+)\$d/g;
+  const floatPlaceholder = /%(\d+)\$(\.\d+)?f/g;
+
+  // Handle floats first (more specific)
+  value = value.replace(floatPlaceholder, (match, idx, precision) => {
+    const varName = isPlural && idx === '1' ? 'count' : `val${index++}`;
+    const digits = precision ? precision.slice(1) : '0';
+    return `{{${varName}, number(minimumFractionDigits: ${digits})}}`;
+  });
+
+  // Then numbers
+  value = value.replace(numberPlaceholder, (match, idx) => {
+    const varName = isPlural && idx === '1' ? 'count' : `val${index++}`;
+    return `{{${varName}}}`;
+  });
+
+  // Then strings
+  value = value.replace(stringPlaceholder, () => {
+    const varName = `val${index++}`;
+    return `{{${varName}}}`;
+  });
+
+  // For iOS plurals, %#@var@ -> {{var}}
+  if (platform === 'ios') {
+    value = value.replace(/%#@(\w+)@/g, '{{$1}}');
+  }
+
+  return value;
+}
+
 function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 module.exports = {
   groupPlurals,
-  tokenizeMessage
+  tokenizeMessage,
+  reverseParseValue
 };

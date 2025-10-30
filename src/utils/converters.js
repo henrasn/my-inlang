@@ -1,4 +1,5 @@
 const QUANTITY_ORDER = ['zero', 'one', 'two', 'few', 'many', 'other'];
+const { reverseParseValue } = require('./parsers');
 
 function toAndroidXml(strings, plurals) {
   const sortedStringKeys = Object.keys(strings || {}).sort();
@@ -130,7 +131,7 @@ function fromAndroidXml(xml) {
     const key = match[1];
     let value = match[2];
     value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-    json[key] = value;
+    json[key] = reverseParseValue(value, 'android', false);
   }
 
   // Parse plurals
@@ -144,7 +145,7 @@ function fromAndroidXml(xml) {
       const quantity = itemMatch[1];
       let value = itemMatch[2];
       value = value.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-      json[`${base}_${quantity}`] = value;
+      json[`${base}_${quantity}`] = reverseParseValue(value, 'android', true);
     }
   }
 
@@ -157,10 +158,10 @@ function fromXcstrings(xcstring, lang) {
     const loc = entry.localizations[lang];
     if (!loc) continue;
     if (loc.stringUnit) {
-      json[key] = loc.stringUnit.value;
+      json[key] = reverseParseValue(loc.stringUnit.value, 'ios', false);
     } else if (loc.variations?.plural) {
       for (const [quantity, variant] of Object.entries(loc.variations.plural)) {
-        json[`${key}_${quantity}`] = variant.stringUnit.value;
+        json[`${key}_${quantity}`] = reverseParseValue(variant.stringUnit.value, 'ios', true);
       }
     }
   }

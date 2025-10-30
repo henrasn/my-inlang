@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert');
-const { groupPlurals } = require('../utils/parsers');
+const { groupPlurals, reverseParseValue } = require('../utils/parsers');
 
 const androidOptions = {
   platform: 'android',
@@ -62,5 +62,19 @@ test('groupPlurals marks plural variable for ios plurals', () => {
   const placeholderMeta = plurals.rooms.quantities.one.placeholders.find(
     entry => entry.name === 'count'
   );
-  assert(placeholderMeta?.isPluralVariable);
+   assert(placeholderMeta?.isPluralVariable);
+});
+
+test('reverseParseValue converts android placeholders back to i18next', () => {
+  assert.strictEqual(reverseParseValue('Hello %1$s', 'android', false), 'Hello {{val0}}');
+  assert.strictEqual(reverseParseValue('%1$d items', 'android', true), '{{count}} items');
+  assert.strictEqual(reverseParseValue('%1$d items', 'android', false), '{{val0}} items');
+  assert.strictEqual(reverseParseValue('Price: %1$.2f', 'android', false), 'Price: {{val0, number(minimumFractionDigits: 2)}}');
+});
+
+test('reverseParseValue converts ios placeholders back to i18next', () => {
+  assert.strictEqual(reverseParseValue('Hello %1$@', 'ios', false), 'Hello {{val0}}');
+  assert.strictEqual(reverseParseValue('%#@count@ items', 'ios', true), '{{count}} items');
+  assert.strictEqual(reverseParseValue('%1$ld items', 'ios', true), '{{count}} items');
+  assert.strictEqual(reverseParseValue('%1$ld items', 'ios', false), '{{val0}} items');
 });
