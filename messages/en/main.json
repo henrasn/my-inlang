@@ -3,5 +3,6 @@
   "register": "Register",
   "available_room_one": "{{count}} room",
   "available_room_other": "{{count}} rooms",
-  "room_price": "Per room is IDR{{price, number}}"
+  "room_price": "Per room is IDR{{price, number}}",
+  "failed_login_message": "your account not found"
 }

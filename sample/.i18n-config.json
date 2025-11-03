@@ -1,0 +1,8 @@
+{
+  "android": "./sample/android",
+  "ios": "./sample/ios",
+  "fe": {
+    "en": "./sample/fe/en.json",
+    "id": "./sample/fe/id.json"
+  }
+}

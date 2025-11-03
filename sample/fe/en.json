@@ -1,0 +1,5 @@
+{
+	"greeting": "Hello {{name}}",
+	"title": "Hello!",
+	"greet": "Welcome to our site"
+}

@@ -4,7 +4,10 @@ const readline = require('readline');
 const { fromAndroidXml } = require('../platforms/android/converters');
 const { fromXcstrings } = require('../platforms/ios/converters');
 
-const configPath = process.env.TARGET_CONFIG || '../.i18n-config.json';
+let configPath = process.env.TARGET_CONFIG;
+if (!configPath) {
+  configPath = fs.existsSync('../.i18n-config.json') ? '../.i18n-config.json' : './sample/.i18n-config.json';
+}
 const platform = process.argv[2];
 
 if (!fs.existsSync(configPath)) {
@@ -77,7 +80,10 @@ async function importAndroid() {
     const jsonFile = `messages/${lang}/android.json`;
     let existing = {};
     if (fs.existsSync(jsonFile)) {
-      existing = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
+      const content = fs.readFileSync(jsonFile, 'utf8').trim();
+      if (content) {
+        existing = JSON.parse(content);
+      }
     }
     await mergeJson(existing, imported, jsonFile);
   }
@@ -104,7 +110,10 @@ async function importIOS() {
     const jsonFile = `messages/${lang}/ios.json`;
     let existing = {};
     if (fs.existsSync(jsonFile)) {
-      existing = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
+      const content = fs.readFileSync(jsonFile, 'utf8').trim();
+      if (content) {
+        existing = JSON.parse(content);
+      }
     }
     await mergeJson(existing, imported, jsonFile);
   }

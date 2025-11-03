@@ -1,0 +1,7 @@
+{
+  "register": "Register",
+  "room_price": "Per room is IDR{{val0}}",
+  "signIn": "SignIn",
+  "available_room_one": "{{count}} room",
+  "available_room_other": "{{count}} rooms"
+}
