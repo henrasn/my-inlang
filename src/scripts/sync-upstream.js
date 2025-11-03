@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
-const { fromAndroidXml, fromXcstrings } = require('../utils/converters');
+const { fromAndroidXml } = require('../platforms/android/converters');
+const { fromXcstrings } = require('../platforms/ios/converters');
 
 const configPath = process.env.TARGET_CONFIG || '../.i18n-config.json';
 const platform = process.argv[2];

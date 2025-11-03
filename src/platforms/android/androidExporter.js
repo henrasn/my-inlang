@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { groupPlurals } = require('../../utils/parsers');
-const { toAndroidXml } = require('../../utils/converters');
+const { groupPlurals } = require('./parsers');
+const { toAndroidXml } = require('./converters');
 const { getVariablePattern } = require('../../utils/config');
 
 function exportAndroid(settings, androidFiles, outputDir) {

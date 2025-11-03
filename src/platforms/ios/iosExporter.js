@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { groupPlurals } = require('../../utils/parsers');
-const { toXcstrings } = require('../../utils/converters');
+const { groupPlurals } = require('./parsers');
+const { toXcstrings } = require('./converters');
 const { getVariablePattern } = require('../../utils/config');
 
 function exportIOS(settings, iosFiles, outputDir) {
