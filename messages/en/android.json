@@ -1,7 +1,10 @@
 {
   "register": "Register",
   "room_price": "Per room is IDR{{val0}}",
-  "signIn": "SignIn",
   "available_room_one": "{{count}} room",
-  "available_room_other": "{{count}} rooms"
+  "failed_login_message": "your account not found",
+  "new_key": "this is new key",
+  "signIn": "SignIn",
+  "available_room_other": "{{count}} rooms",
+  "discount": "you have discount {{val0, number(minimumFractionDigits: 2)}}"
 }

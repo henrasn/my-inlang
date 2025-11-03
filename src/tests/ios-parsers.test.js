@@ -37,5 +37,5 @@ test('reverseParseValue converts ios placeholders back to i18next', () => {
   assert.strictEqual(reverseParseValue('Hello %1$@', 'ios', false), 'Hello {{val0}}');
   assert.strictEqual(reverseParseValue('%#@count@ items', 'ios', true), '{{count}} items');
   assert.strictEqual(reverseParseValue('%1$ld items', 'ios', true), '{{count}} items');
-  assert.strictEqual(reverseParseValue('%1$ld items', 'ios', false), '{{val0}} items');
+  assert.strictEqual(reverseParseValue('%1$ld items', 'ios', false), '{{val0, number}} items');
 });

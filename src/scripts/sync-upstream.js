@@ -70,22 +70,27 @@ async function importAndroid() {
   const sourceLang = settings.sourceLanguageTag;
   for (const lang of langs) {
     const langSuffix = lang === sourceLang ? '' : `-${lang}`;
-    const xmlFile = path.join(baseDir, `values${langSuffix}`, 'main.xml');
-    if (!fs.existsSync(xmlFile)) {
-      console.log(`Android file ${xmlFile} not found, skipping ${lang}`);
+    const valuesDir = path.join(baseDir, `values${langSuffix}`);
+    if (!fs.existsSync(valuesDir)) {
+      console.log(`Android dir ${valuesDir} not found, skipping ${lang}`);
       continue;
     }
-    const xml = fs.readFileSync(xmlFile, 'utf8');
-    const imported = fromAndroidXml(xml);
-    const jsonFile = `messages/${lang}/android.json`;
-    let existing = {};
-    if (fs.existsSync(jsonFile)) {
-      const content = fs.readFileSync(jsonFile, 'utf8').trim();
-      if (content) {
-        existing = JSON.parse(content);
+    const files = fs.readdirSync(valuesDir).filter(file => file.endsWith('.xml'));
+    for (const file of files) {
+      const xmlFile = path.join(valuesDir, file);
+      const xml = fs.readFileSync(xmlFile, 'utf8');
+      const imported = fromAndroidXml(xml);
+      const fileName = path.basename(file, '.xml');
+      const jsonFile = `messages/${lang}/${fileName}.json`;
+      let existing = {};
+      if (fs.existsSync(jsonFile)) {
+        const content = fs.readFileSync(jsonFile, 'utf8').trim();
+        if (content) {
+          existing = JSON.parse(content);
+        }
       }
+      await mergeJson(existing, imported, jsonFile);
     }
-    await mergeJson(existing, imported, jsonFile);
   }
 }
 
@@ -95,27 +100,31 @@ async function importIOS() {
     return;
   }
   const baseDir = config.ios;
-  const xcstringsFile = path.join(baseDir, 'main.xcstrings');
-  if (!fs.existsSync(xcstringsFile)) {
-    console.log(`iOS file ${xcstringsFile} not found, skipping`);
+  if (!fs.existsSync(baseDir)) {
+    console.log(`iOS dir ${baseDir} not found, skipping`);
     return;
   }
-  const xcstring = JSON.parse(fs.readFileSync(xcstringsFile, 'utf8'));
-  for (const lang of langs) {
-    const imported = fromXcstrings(xcstring, lang);
-    if (Object.keys(imported).length === 0) {
-      console.log(`No data for ${lang} in iOS file, skipping`);
-      continue;
-    }
-    const jsonFile = `messages/${lang}/ios.json`;
-    let existing = {};
-    if (fs.existsSync(jsonFile)) {
-      const content = fs.readFileSync(jsonFile, 'utf8').trim();
-      if (content) {
-        existing = JSON.parse(content);
+  const files = fs.readdirSync(baseDir).filter(file => file.endsWith('.xcstrings'));
+  for (const file of files) {
+    const xcstringsFile = path.join(baseDir, file);
+    const xcstring = JSON.parse(fs.readFileSync(xcstringsFile, 'utf8'));
+    for (const lang of langs) {
+      const imported = fromXcstrings(xcstring, lang);
+      if (Object.keys(imported).length === 0) {
+        console.log(`No data for ${lang} in ${xcstringsFile}, skipping`);
+        continue;
       }
+      const fileName = path.basename(file, '.xcstrings');
+      const jsonFile = `messages/${lang}/${fileName}.json`;
+      let existing = {};
+      if (fs.existsSync(jsonFile)) {
+        const content = fs.readFileSync(jsonFile, 'utf8').trim();
+        if (content) {
+          existing = JSON.parse(content);
+        }
+      }
+      await mergeJson(existing, imported, jsonFile);
     }
-    await mergeJson(existing, imported, jsonFile);
   }
 }
 

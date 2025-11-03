@@ -1,5 +1,110 @@
 {
   "version": "1.0",
   "sourceLanguage": "en",
-  "strings": {}
+  "strings": {
+    "available_room": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%#@count@ room"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%#@count@ rooms"
+                }
+              }
+            }
+          },
+          "stringVariations": {
+            "count": {
+              "ruleType": "plural",
+              "formatSpecifier": "%#@count@"
+            }
+          }
+        },
+        "id": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%#@count@ kamar"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%#@count@ kamar"
+                }
+              }
+            }
+          },
+          "stringVariations": {
+            "count": {
+              "ruleType": "plural",
+              "formatSpecifier": "%#@count@"
+            }
+          }
+        }
+      }
+    },
+    "register": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Register"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Register"
+          }
+        }
+      }
+    },
+    "room_price": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per room is IDR%1$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harga per kamar IDR%1$@"
+          }
+        }
+      }
+    },
+    "signIn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SignIn"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masuk"
+          }
+        }
+      }
+    }
+  }
 }

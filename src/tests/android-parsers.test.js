@@ -37,6 +37,6 @@ test('groupPlurals formats numeric placeholders on android', () => {
 test('reverseParseValue converts android placeholders back to i18next', () => {
   assert.strictEqual(reverseParseValue('Hello %1$s', 'android', false), 'Hello {{val0}}');
   assert.strictEqual(reverseParseValue('%1$d items', 'android', true), '{{count}} items');
-  assert.strictEqual(reverseParseValue('%1$d items', 'android', false), '{{val0}} items');
+  assert.strictEqual(reverseParseValue('%1$d items', 'android', false), '{{val0, number}} items');
   assert.strictEqual(reverseParseValue('Price: %1$.2f', 'android', false), 'Price: {{val0, number(minimumFractionDigits: 2)}}');
 });

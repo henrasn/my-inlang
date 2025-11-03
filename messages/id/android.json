@@ -3,5 +3,8 @@
   "room_price": "Harga per kamar IDR{{val0}}",
   "signIn": "Masuk",
   "available_room_one": "{{count}} kamar",
-  "available_room_other": "{{count}} kamar"
+  "failed_login_message": "akun tidak ditemukan",
+  "new_key": "ini adalah key baru",
+  "available_room_other": "{{count}} kamar",
+  "discount": "anda memiliki diskon {{val0, number(minimumFractionDigits: 2)}}"
 }

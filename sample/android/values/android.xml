@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="failed_login_message">your account not found</string>
+  <string name="new_key">this is new key</string>
   <string name="register">Register</string>
   <string name="room_price">Per room is IDR%1$s</string>
   <string name="signIn">SignIn</string>
@@ -7,4 +9,5 @@
     <item quantity="one">%1$d room</item>
     <item quantity="other">%1$d rooms</item>
   </plurals>
+  <string name="discount">you have discount %1$.2f</string>
 </resources>

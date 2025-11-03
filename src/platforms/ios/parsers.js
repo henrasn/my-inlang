@@ -261,7 +261,7 @@ function reverseParseValue(value, platform, isPlural = false) {
   // Then numbers
   value = value.replace(numberPlaceholder, (match, idx) => {
     const varName = isPlural && idx === '1' ? 'count' : `val${index++}`;
-    return `{{${varName}}}`;
+    return `{{${varName}${varName.startsWith('val') ? ', number' : ''}}}`;
   });
 
   // Then strings

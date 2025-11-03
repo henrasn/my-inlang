@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="failed_login_message">akun tidak ditemukan</string>
+  <string name="new_key">ini adalah key baru</string>
   <string name="register">Register</string>
   <string name="room_price">Harga per kamar IDR%1$s</string>
   <string name="signIn">Masuk</string>

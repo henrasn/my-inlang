@@ -2,7 +2,7 @@
 <resources>
   <string name="failed_login_message">your account not found</string>
   <string name="register">Register</string>
-  <string name="room_price">Per room is IDR%1$d</string>
+   <string name="room_price">Per room is IDR%1$d</string>
   <string name="signIn">SignIn</string>
   <plurals name="available_room">
     <item quantity="one">%1$d room</item>

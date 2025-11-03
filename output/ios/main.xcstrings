@@ -55,6 +55,23 @@
         }
       }
     },
+    "failed_login_message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your account not found"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "akun tidak ditemukan"
+          }
+        }
+      }
+    },
     "register": {
       "extractionState": "manual",
       "localizations": {
@@ -78,13 +95,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Per room is IDR%1$ld"
+            "value": "Per room is IDR%1$@"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Harga per kamar IDR%1$ld"
+            "value": "Harga per kamar IDR%1$@"
           }
         }
       }
