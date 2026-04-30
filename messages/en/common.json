@@ -1,5 +1,6 @@
 {
 	"greeting": "Hello {{name}}",
 	"title": "Hello!",
-	"greet": "Welcome to our site"
+	"greet": "Welcome to our site",
+	"sanity": "test"
 }
